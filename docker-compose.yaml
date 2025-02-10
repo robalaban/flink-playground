@@ -1,0 +1,45 @@
+services:
+  jobmanager:
+    image: flink:1.20.0
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    env_file:
+      - .env
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        jobmanager.memory.process.size: 1600m
+        classloader.parent-first-patterns.additional: org.apache.flink.fs.s3.common;org.apache.iceberg.*;software.amazon.awssdk.*
+
+  taskmanager:
+    image: flink:1.20.0
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    scale: 1
+    env_file:
+      - .env
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+        taskmanager.memory.process.size: 1728m
+        classloader.parent-first-patterns.additional: org.apache.flink.fs.s3.common;org.apache.iceberg.*;software.amazon.awssdk.*
+
+  sql-client:
+    build: 
+      context: ./sql-client
+      dockerfile: Dockerfile
+    depends_on:
+      - jobmanager
+    env_file:
+      - .env
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        rest.address: jobmanager
+        classloader.parent-first-patterns.additional: org.apache.flink.fs.s3.common;org.apache.iceberg.*;software.amazon.awssdk.*
