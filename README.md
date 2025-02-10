@@ -25,10 +25,10 @@ docker compose build
 docker compose up -d
 ```
 
-For SQL Client, you can use the following command to initialize the catalog:
+For SQL Client, you can use the following command to jump into the container and initialize the catalog. The `init.sql` file is located in the `sql-client` directory. 
 
 ```sh
-docker exec -it flink-sql-client-1
+docker exec -it flink-sql-client-1 ./bin/sql-client.sh --init /opt/flink/lib/init.sql
 ```
 
 

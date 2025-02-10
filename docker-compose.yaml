@@ -43,3 +43,5 @@ services:
         jobmanager.rpc.address: jobmanager
         rest.address: jobmanager
         classloader.parent-first-patterns.additional: org.apache.flink.fs.s3.common;org.apache.iceberg.*;software.amazon.awssdk.*
+    volumes:
+      - ./sql-client/init.sql:/opt/flink/lib/init.sql
