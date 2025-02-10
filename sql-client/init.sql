@@ -1,6 +1,6 @@
 -- Create Catalog
 
-CREATE CATALOG some_catalog WITH (
+CREATE CATALOG iceberg_catalog WITH (
   'type'='iceberg',
   'warehouse'='s3://sandbox-lakehouse-91779879',
   'catalog-impl'='org.apache.iceberg.aws.glue.GlueCatalog',
