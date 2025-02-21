@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group = 'org.example'
+group = 'org.calysis'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -11,6 +11,8 @@ repositories {
 }
 
 def flinkVersion = '1.20.0'
+def icebergVersion = '1.7.1'
+def awsVersion = '2.30.16'
 
 dependencies {
     // Flink
@@ -20,6 +22,11 @@ dependencies {
     implementation "org.apache.flink:flink-runtime-web:${flinkVersion}"
     implementation "org.apache.flink:flink-core:${flinkVersion}"
     
+    // Add Iceberg and AWS dependencies
+    implementation "org.apache.iceberg:iceberg-flink-runtime-1.20:${icebergVersion}"
+    implementation "software.amazon.awssdk:bundle:${awsVersion}"
+    implementation "org.apache.hadoop:hadoop-client:3.4.1"
+    implementation "org.apache.hadoop:hadoop-aws:3.4.1"
     
     // Logging
     implementation 'org.slf4j:slf4j-api:2.0.7'
@@ -28,12 +35,12 @@ dependencies {
 }
 
 application {
-    mainClass = 'org.example.StreamingJob'
+    mainClass = 'org.calysis.StreamingJob'
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'org.example.StreamingJob'
+        attributes 'Main-Class': 'org.calysis.StreamingJob'
     }
     
     // Include dependencies in the JAR

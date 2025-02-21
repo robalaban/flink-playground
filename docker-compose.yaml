@@ -1,6 +1,8 @@
 services:
   jobmanager:
-    image: flink:1.20.0
+    build: 
+      context: ./sql-client
+      dockerfile: Dockerfile
     ports:
       - "8081:8081"
     command: jobmanager
@@ -14,7 +16,9 @@ services:
         classloader.parent-first-patterns.additional: org.apache.flink.fs.s3.common;org.apache.iceberg.*;software.amazon.awssdk.*
 
   taskmanager:
-    image: flink:1.20.0
+    build: 
+      context: ./sql-client
+      dockerfile: Dockerfile
     depends_on:
       - jobmanager
     command: taskmanager
