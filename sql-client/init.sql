@@ -7,3 +7,5 @@ CREATE CATALOG iceberg_catalog WITH (
   'io-impl'='org.apache.iceberg.aws.s3.S3FileIO'
 );
 
+-- Use the catalog
+USE catalog iceberg_catalog;

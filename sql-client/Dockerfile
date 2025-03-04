@@ -9,7 +9,8 @@ RUN apt-get update && \
 RUN mkdir -p /opt/hadoop/lib && mkdir -p /opt/hadoop/conf && cd /opt/hadoop/lib && \
   wget https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-client/3.4.1/hadoop-client-3.4.1.jar && \
   wget https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-client-api/3.4.1/hadoop-client-api-3.4.1.jar && \
-  wget https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.4.1/hadoop-client-runtime-3.4.1.jar
+  wget https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.4.1/hadoop-client-runtime-3.4.1.jar && \
+  wget https://repo1.maven.org/maven2/org/apache/flink/flink-json/1.20.0/flink-json-1.20.0.jar
 
 # Download Hadoop AWS dependencies
 RUN cd /opt/flink/lib/ && \
